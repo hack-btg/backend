@@ -10,12 +10,12 @@ import (
 )
 
 type Server struct {
-	service service.Orders
+	service service.Caixinha
 	config  Config
 	echo    *echo.Echo
 }
 
-func NewServer(svc service.Orders, cfg Config) Server {
+func NewServer(svc service.Caixinha, cfg Config) Server {
 	return Server{
 		service: svc,
 		config:  cfg,

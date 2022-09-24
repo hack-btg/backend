@@ -1,32 +1,46 @@
 package service
 
-import "context"
+import (
+	"context"
 
-type Orders interface {
-	GetOne(ctx context.Context) (string, error)
-	GetMany(ctx context.Context) error
-	Remove(ctx context.Context) error
+	"github.com/hack-btg/backend/internal/domains/models"
+	"github.com/hack-btg/backend/storage"
+)
+
+type Caixinha interface {
+	Create(ctx context.Context, c models.Caixinha) (models.Caixinha, error)
+	List(ctx context.Context) models.Caixinhas
+	GetOne(ctx context.Context, id int) (models.Caixinha, error)
+	Update(ctx context.Context, c models.Caixinha) error
+	Delete(ctx context.Context, id int) error
 }
 
-type Service struct {
-	Repo OrdersRepository
+type CXService struct {
+	cxRepo CaixinhaRepository
 }
 
-func NewService(repo OrdersRepository) Service {
-	return Service{repo}
+func NewCXService() CXService {
+	return CXService{
+		cxRepo: storage.NewCaixinhaRepo(),
+	}
 }
 
-func (s Service) GetOne(ctx context.Context) (str string, err error) {
-
-	return s.Repo.GetOne()
+func (s CXService) Create(ctx context.Context, c models.Caixinha) (cx models.Caixinha, err error) {
+	return s.cxRepo.Create(c)
 }
 
-func (s Service) GetMany(ctx context.Context) (err error) {
-
-	return
+func (s CXService) GetOne(ctx context.Context, id int) (cx models.Caixinha, err error) {
+	return s.cxRepo.GetOne(id)
 }
 
-func (s Service) Remove(ctx context.Context) (err error) {
+func (s CXService) List(ctx context.Context) models.Caixinhas {
+	return s.cxRepo.List()
+}
 
-	return
+func (s CXService) Update(ctx context.Context, c models.Caixinha) (err error) {
+	return s.cxRepo.Update(c)
+}
+
+func (s CXService) Delete(ctx context.Context, id int) (err error) {
+	return s.cxRepo.Delete(id)
 }

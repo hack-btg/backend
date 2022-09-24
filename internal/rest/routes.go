@@ -9,7 +9,7 @@ import (
 )
 
 func RouterRegister(e *echo.Echo, tp jwt.TokenProvider) {
-	adapter := handlers.NewHTTPPrimaryAdapter(nil, tp)
+	adapter := handlers.NewHTTPPrimaryAdapter(tp)
 
 	e.GET("/", HealthCheck)
 	e.POST("/login", adapter.UserLogin)

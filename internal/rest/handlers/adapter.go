@@ -6,13 +6,13 @@ import (
 )
 
 type HTTPPrimaryAdapter struct {
-	service       service.Orders
-	tokenProvider jwt.TokenProvider
+	CaixinhaService service.Caixinha
+	tokenProvider   jwt.TokenProvider
 }
 
-func NewHTTPPrimaryAdapter(s service.Orders, provider jwt.TokenProvider) *HTTPPrimaryAdapter {
+func NewHTTPPrimaryAdapter(provider jwt.TokenProvider) *HTTPPrimaryAdapter {
 	return &HTTPPrimaryAdapter{
-		service:       s,
-		tokenProvider: provider,
+		CaixinhaService: service.NewCXService(),
+		tokenProvider:   provider,
 	}
 }
