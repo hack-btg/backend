@@ -7,10 +7,10 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/arxdsilva/desafios-api/internal/grpc"
 	"github.com/arxdsilva/desafios-api/internal/jwt"
 	"github.com/arxdsilva/desafios-api/internal/logger"
 	"github.com/arxdsilva/desafios-api/internal/option"
+	"github.com/arxdsilva/desafios-api/internal/rest"
 	"golang.org/x/sync/errgroup"
 
 	log "github.com/sirupsen/logrus"
@@ -48,30 +48,21 @@ func startup(ctx context.Context, cfg *option.Config) error {
 
 	log.Info("starting the service")
 
-	// maybe add some tracer
+	provider := jwt.NewProvider(cfg.JWT) // take the provider and pass to the rest api
 
-	jwt.NewProvider(cfg.JWT) // take the provider and pass to the rest api
-
-	// change this
-	resolver := grpc.NewResolver(nil, nil)
-	server, err := grpc.NewServer(resolver)
-	if err != nil {
-		return fmt.Errorf(`new server error %w`, err)
-	}
+	srv := rest.NewServer(nil, provider, cfg.Rest)
 
 	errg, ctx := errgroup.WithContext(ctx)
 	errg.Go(func() error {
-		return server.Run(ctx)
+		return srv.Run(ctx, cfg.Rest)
 	})
 
-	log.Info("service started")
-
-	if err = errg.Wait(); err != nil {
+	log.Infof("service started on port %v", cfg.Rest.Port)
+	if err := errg.Wait(); err != nil {
 		log.Error(err)
 	}
 
 	log.Info("service stopped")
-
 	return nil
 }
 

@@ -1,8 +1,0 @@
-syntax = "proto3";
-package reference;
-
-
-message Example {
-	double value = 1;
-	string unit = 2;
-}
