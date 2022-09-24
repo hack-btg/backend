@@ -13,6 +13,7 @@ var (
 )
 
 type CaixinhaRepo struct {
+	idx     int
 	storage models.Caixinhas
 	mtx     *sync.Mutex
 }
@@ -25,9 +26,10 @@ func NewCaixinhaRepo() *CaixinhaRepo {
 }
 
 func (cr *CaixinhaRepo) Create(cx models.Caixinha) (models.Caixinha, error) {
-	cx.ID = len(cr.storage) + 1
-	cx.CreatedAtDate = time.Now()
 	cr.mtx.Lock()
+	cx.ID = cr.idx + 1
+	cr.idx = cx.ID
+	cx.CreatedAtDate = time.Now()
 	cr.storage = append(cr.storage, cx)
 	cr.mtx.Unlock()
 	return cx, nil
