@@ -7,10 +7,10 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/arxdsilva/desafios-api/internal/jwt"
-	"github.com/arxdsilva/desafios-api/internal/logger"
-	"github.com/arxdsilva/desafios-api/internal/option"
-	"github.com/arxdsilva/desafios-api/internal/rest"
+	"github.com/hack-btg/backend/internal/jwt"
+	"github.com/hack-btg/backend/internal/logger"
+	"github.com/hack-btg/backend/internal/option"
+	"github.com/hack-btg/backend/internal/rest"
 	"golang.org/x/sync/errgroup"
 
 	log "github.com/sirupsen/logrus"
@@ -48,13 +48,13 @@ func startup(ctx context.Context, cfg *option.Config) error {
 
 	log.Info("starting the service")
 
-	provider := jwt.NewProvider(cfg.JWT) // take the provider and pass to the rest api
+	srv := rest.NewServer(nil, cfg.Rest)
 
-	srv := rest.NewServer(nil, provider, cfg.Rest)
+	provider := jwt.NewProvider(cfg.JWT)
 
 	errg, ctx := errgroup.WithContext(ctx)
 	errg.Go(func() error {
-		return srv.Run(ctx, cfg.Rest)
+		return srv.Run(ctx, cfg.Rest, provider)
 	})
 
 	log.Infof("service started on port %v", cfg.Rest.Port)

@@ -1,7 +1,7 @@
 package rest
 
 import (
-	"github.com/arxdsilva/desafios-api/internal/jwt"
+	"github.com/hack-btg/backend/internal/jwt"
 
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"

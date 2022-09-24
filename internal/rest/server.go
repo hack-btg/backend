@@ -4,34 +4,32 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/arxdsilva/desafios-api/internal/jwt"
-	"github.com/arxdsilva/desafios-api/internal/service"
+	"github.com/hack-btg/backend/internal/jwt"
+	"github.com/hack-btg/backend/internal/service"
 	"github.com/labstack/echo/v4"
 )
 
 type Server struct {
-	service       service.Orders
-	tokenProvider jwt.TokenProvider
-	config        Config
-	echo          *echo.Echo
+	service service.Orders
+	config  Config
+	echo    *echo.Echo
 }
 
-func NewServer(svc service.Orders, tp jwt.TokenProvider, cfg Config) Server {
+func NewServer(svc service.Orders, cfg Config) Server {
 	return Server{
-		service:       svc,
-		tokenProvider: tp,
-		config:        cfg,
+		service: svc,
+		config:  cfg,
 	}
 }
 
-func (s Server) Run(ctx context.Context, cfg Config) error {
+func (s Server) Run(ctx context.Context, cfg Config, tp jwt.TokenProvider) error {
 	go func() {
 		<-ctx.Done()
 		s.close()
 	}()
 	s.echo = echo.New()
 	Register(s.echo)
-	RouterRegister(s.echo)
+	RouterRegister(s.echo, tp)
 
 	return s.echo.Start(portStr(cfg.Port))
 }

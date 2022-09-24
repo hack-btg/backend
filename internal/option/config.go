@@ -3,11 +3,10 @@ package option
 import (
 	"fmt"
 
-	"github.com/arxdsilva/desafios-api/internal/grpc"
-	"github.com/arxdsilva/desafios-api/internal/jwt"
-	"github.com/arxdsilva/desafios-api/internal/logger"
-	"github.com/arxdsilva/desafios-api/internal/rest"
 	"github.com/go-playground/validator/v10"
+	"github.com/hack-btg/backend/internal/jwt"
+	"github.com/hack-btg/backend/internal/logger"
+	"github.com/hack-btg/backend/internal/rest"
 	"github.com/kelseyhightower/envconfig"
 )
 
@@ -15,7 +14,6 @@ const prefix = "APP"
 
 type Config struct {
 	Rest rest.Config
-	GRPC grpc.Config
 	Log  logger.Config
 	JWT  jwt.Config
 }
