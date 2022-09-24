@@ -3,6 +3,7 @@ package storage
 import (
 	"errors"
 	"sync"
+	"time"
 
 	"github.com/hack-btg/backend/internal/domains/models"
 )
@@ -16,22 +17,23 @@ type CaixinhaRepo struct {
 	mtx     *sync.Mutex
 }
 
-func NewCaixinhaRepo() CaixinhaRepo {
-	return CaixinhaRepo{
+func NewCaixinhaRepo() *CaixinhaRepo {
+	return &CaixinhaRepo{
 		storage: models.Caixinhas{},
 		mtx:     &sync.Mutex{},
 	}
 }
 
-func (cr CaixinhaRepo) Create(cx models.Caixinha) (c models.Caixinha, err error) {
+func (cr *CaixinhaRepo) Create(cx models.Caixinha) (models.Caixinha, error) {
 	cx.ID = len(cr.storage) + 1
+	cx.CreatedAtDate = time.Now()
 	cr.mtx.Lock()
 	cr.storage = append(cr.storage, cx)
 	cr.mtx.Unlock()
-	return c, ErrCaixinhaNotFound
+	return cx, nil
 }
 
-func (cr CaixinhaRepo) GetOne(id int) (c models.Caixinha, err error) {
+func (cr *CaixinhaRepo) GetOne(id int) (c models.Caixinha, err error) {
 	for _, cs := range cr.storage {
 		if cs.ID == id {
 			return cs, nil
@@ -40,11 +42,11 @@ func (cr CaixinhaRepo) GetOne(id int) (c models.Caixinha, err error) {
 	return c, ErrCaixinhaNotFound
 }
 
-func (cr CaixinhaRepo) List() (c models.Caixinhas) {
+func (cr *CaixinhaRepo) List() (c models.Caixinhas) {
 	return cr.storage
 }
 
-func (cr CaixinhaRepo) Delete(id int) (err error) {
+func (cr *CaixinhaRepo) Delete(id int) (err error) {
 	// st := cr.storage
 	for i, cs := range cr.storage {
 		if cs.ID == id {
@@ -57,7 +59,7 @@ func (cr CaixinhaRepo) Delete(id int) (err error) {
 	return ErrCaixinhaNotFound
 }
 
-func (cr CaixinhaRepo) Update(cx models.Caixinha) (err error) {
+func (cr *CaixinhaRepo) Update(cx models.Caixinha) (err error) {
 	for i, cs := range cr.storage {
 		if cs.ID == cx.ID {
 			cr.mtx.Lock()
