@@ -18,11 +18,11 @@ func RouterRegister(e *echo.Echo, tp jwt.TokenProvider) {
 	e.GET("/users/caixinhas/list", adapter.ListCX)
 	// todo
 	users := e.Group("/users", JWT())
-	users.POST("/caixinha", adapter.CreateCX)      //create
-	users.GET("/caixinhas", adapter.ListCX)        //list
-	users.GET("/caixinhas/:id", adapter.ListCX)    //getone
-	users.PUT("/caixinhas/:id", adapter.ListCX)    //update
-	users.DELETE("/caixinhas/:id", adapter.ListCX) //delete
+	users.POST("/caixinha", adapter.CreateCX)        //create
+	users.GET("/caixinhas", adapter.ListCX)          //list
+	users.PUT("/caixinhas/", adapter.UpdateCX)       //update
+	users.GET("/caixinhas/:id", adapter.GetOneCX)    //getone
+	users.DELETE("/caixinhas/:id", adapter.DeleteCX) //delete
 
 }
 

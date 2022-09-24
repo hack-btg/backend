@@ -7,6 +7,7 @@ type Caixinhas []Caixinha
 type Caixinha struct {
 	ID                  int       `json:"id"`
 	Name                string    `json:"name"`
+	Description         string    `json:"description"`
 	TotalValue          float64   `json:"total_value"`
 	CommunityTotalValue float64   `json:"community_total_value"`
 	CommunityTax        float64   `json:"community_tax"`

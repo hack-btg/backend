@@ -29,8 +29,24 @@ func (h *HTTPPrimaryAdapter) GetOneCX(c echo.Context) (err error) {
 		l.Error("[GetOneCX] error ", err.Error())
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
-	l.Info("[GetOneCX] listing")
+	l.Info("[GetOneCX] ok")
 	return c.JSON(http.StatusOK, cx)
+}
+
+func (h *HTTPPrimaryAdapter) DeleteCX(c echo.Context) (err error) {
+	l := log.WithField("cid", c.Response().Header().Get(echo.HeaderXRequestID))
+	id := c.Param("id")
+	idInt, err := strconv.Atoi(id)
+	if err != nil {
+		l.Error("[DeleteCX] error ", err.Error())
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+	if err = h.CaixinhaService.Delete(c.Request().Context(), idInt); err != nil {
+		l.Error("[DeleteCX] error ", err.Error())
+		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
+	}
+	l.Info("[DeleteCX] ok")
+	return c.NoContent(http.StatusNoContent)
 }
 
 func (h *HTTPPrimaryAdapter) CreateCX(c echo.Context) (err error) {
@@ -45,6 +61,22 @@ func (h *HTTPPrimaryAdapter) CreateCX(c echo.Context) (err error) {
 		l.Error("[CreateCX] svc create error ", err.Error())
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
-	l.Info("[CreateCX] listing")
+	l.Info("[CreateCX] ok")
 	return c.JSON(http.StatusOK, ccx)
+}
+
+func (h *HTTPPrimaryAdapter) UpdateCX(c echo.Context) (err error) {
+	l := log.WithField("cid", c.Response().Header().Get(echo.HeaderXRequestID))
+	cx := &models.Caixinha{}
+	if err := c.Bind(cx); err != nil {
+		l.Error("[CreateCX] Bind error ", err.Error())
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+	err = h.CaixinhaService.Update(c.Request().Context(), *cx)
+	if err != nil {
+		l.Error("[CreateCX] svc update error ", err.Error())
+		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
+	}
+	l.Info("[CreateCX] ok")
+	return c.NoContent(http.StatusNoContent)
 }
