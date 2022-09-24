@@ -15,7 +15,6 @@ func RouterRegister(e *echo.Echo, tp jwt.TokenProvider) {
 
 	e.GET("/", HealthCheck)
 	e.POST("/login", adapter.UserLogin)
-	e.GET("/users/caixinhas/list", adapter.ListCX)
 	// todo
 	users := e.Group("/users", JWT())
 	users.POST("/caixinha", adapter.CreateCX)        //create
@@ -24,6 +23,8 @@ func RouterRegister(e *echo.Echo, tp jwt.TokenProvider) {
 	users.GET("/caixinhas/:id", adapter.GetOneCX)    //getone
 	users.DELETE("/caixinhas/:id", adapter.DeleteCX) //delete
 
+	banks := e.Group("/banks", JWT())
+	banks.GET("/", adapter.ListCX)
 }
 
 // todo: allow this to be configurable and to pass optional checks

@@ -62,7 +62,7 @@ func (h *HTTPPrimaryAdapter) CreateCX(c echo.Context) (err error) {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
 	l.Info("[CreateCX] ok")
-	return c.JSON(http.StatusOK, ccx)
+	return c.JSON(http.StatusCreated, ccx)
 }
 
 func (h *HTTPPrimaryAdapter) UpdateCX(c echo.Context) (err error) {
