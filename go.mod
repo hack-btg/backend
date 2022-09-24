@@ -1,13 +1,12 @@
 module github.com/hack-btg/backend
 
-go 1.19
+go 1.18
 
 require (
 	github.com/go-playground/validator/v10 v10.11.0
 	github.com/golang-jwt/jwt/v4 v4.4.1
 	github.com/google/uuid v1.3.0
 	github.com/kelseyhightower/envconfig v1.4.0
-	github.com/labstack/echo v3.3.10+incompatible
 	github.com/labstack/echo/v4 v4.7.2
 	github.com/sirupsen/logrus v1.8.1
 	golang.org/x/sync v0.0.0-20201207232520-09787c993a3a
