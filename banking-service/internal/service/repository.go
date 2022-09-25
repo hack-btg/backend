@@ -19,3 +19,7 @@ type BankRepository interface {
 type UserRepository interface {
 	Info() models.UserInfo
 }
+
+type SocialRepository interface {
+	Get() models.Social
+}
