@@ -24,7 +24,7 @@ func RouterRegister(e *echo.Echo, tp jwt.TokenProvider) {
 	users.DELETE("/caixinhas/:id", adapter.DeleteCX) //delete
 
 	banks := e.Group("/banks", JWT())
-	banks.GET("/", adapter.ListCX)
+	banks.GET("/", adapter.ListBanks)
 }
 
 // todo: allow this to be configurable and to pass optional checks

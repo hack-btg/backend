@@ -7,12 +7,14 @@ import (
 
 type HTTPPrimaryAdapter struct {
 	CaixinhaService service.Caixinha
+	BankService     service.Bank
 	tokenProvider   jwt.TokenProvider
 }
 
 func NewHTTPPrimaryAdapter(provider jwt.TokenProvider) *HTTPPrimaryAdapter {
 	return &HTTPPrimaryAdapter{
 		CaixinhaService: service.NewCXService(),
+		BankService:     service.NewBankService(),
 		tokenProvider:   provider,
 	}
 }

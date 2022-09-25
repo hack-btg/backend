@@ -9,3 +9,9 @@ type CaixinhaRepository interface {
 	Delete(id int) error
 	Update(cx models.Caixinha) error
 }
+
+type BankRepository interface {
+	List() models.Banks
+	IsEmpty() bool
+	Load(models.Banks)
+}

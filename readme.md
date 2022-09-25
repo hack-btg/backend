@@ -25,6 +25,14 @@ curl --request POST \
 | `GET`  | /caixinhas/:id |  Retorna os dados especificos de uma caixinha.                                           | (5)    |
 
 
+### /banks
+
+| Método  | Endpoint      |  Descrição                                                                     | cURL |
+| -------- | ------------- |  ------------------------------------------------------------------------------- | ---- |
+| `GET`  | / |  Retorna as instituicoes usadas para busca de credito.                                           | (6)    |
+
+
+
 
 #### (1) cURL POST /users/caixinha
 
@@ -158,4 +166,37 @@ Resposta: `200 OK`
 	"created_at": "2022-09-24T21:49:21.540170766Z",
 	"is_community": true
 }
+```
+
+#### (6) cURL GET /banks/
+
+```shell
+curl --request GET \
+  --url http://3.236.209.27:5001/banks/
+```
+
+```json
+[
+	{
+		"OrganisationId": "fefac57d-1d50-5615-89b2-0b2d80623a28",
+		"Status": "Active",
+		"OrganisationName": "CCR DE OURO",
+		"CreatedOn": "2021-01-11T17:11:30.743Z",
+		"LegalEntityName": "COOPERATIVA DE CRÉDITO RURAL DE OURO   SULCREDI/OURO",
+		"CountryOfRegistration": "BR",
+		"CompanyRegister": "Cadastro Nacional da Pessoa Jurídica",
+		"Tag": null,
+		"Size": null,
+		"RegistrationNumber": "07853842000135",
+		"RegistrationId": "07853842",
+		"RegisteredName": "COOPERATIVA DE CRÉDITO RURAL DE OURO   SULCREDI/OURO",
+		"AddressLine1": "Rua Felipe Schmidt 1882",
+		"AddressLine2": "Centro",
+		"City": "Ouro, SC",
+		"Postcode": "89663-000",
+		"Country": "BR",
+		"ParentOrganisationReference": "",
+		...
+	}
+]
 ```
