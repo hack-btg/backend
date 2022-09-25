@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/hack-btg/backend/internal/domains/models"
+	"github.com/hack-btg/backend/banking-service/internal/domains/models"
 	"github.com/labstack/echo/v4"
 
 	log "github.com/sirupsen/logrus"

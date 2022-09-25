@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"github.com/hack-btg/backend/internal/jwt"
-	"github.com/hack-btg/backend/internal/service"
+	"github.com/hack-btg/backend/banking-service/internal/jwt"
+	"github.com/hack-btg/backend/banking-service/internal/service"
 )
 
 type HTTPPrimaryAdapter struct {

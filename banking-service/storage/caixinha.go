@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/hack-btg/backend/internal/domains/models"
+	"github.com/hack-btg/backend/banking-service/internal/domains/models"
 )
 
 var (

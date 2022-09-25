@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	"github.com/hack-btg/backend/internal/domains/models"
-	"github.com/hack-btg/backend/storage"
+	"github.com/hack-btg/backend/banking-service/internal/domains/models"
+	"github.com/hack-btg/backend/banking-service/storage"
 )
 
 type Caixinha interface {

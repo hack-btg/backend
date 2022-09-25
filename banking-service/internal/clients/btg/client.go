@@ -2,11 +2,11 @@ package btg
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"time"
 
-	"github.com/hack-btg/backend/internal/domains/models"
+	"github.com/hack-btg/backend/banking-service/internal/domains/models"
 )
 
 type Client struct {
@@ -31,7 +31,7 @@ func (c *Client) GetBanks() (models.Banks, error) {
 		return nil, err
 	}
 	defer res.Body.Close()
-	body, err := ioutil.ReadAll(res.Body)
+	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		return nil, err
 	}

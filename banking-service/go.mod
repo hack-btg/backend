@@ -1,4 +1,4 @@
-module github.com/hack-btg/backend
+module github.com/hack-btg/backend/banking-service
 
 go 1.18
 

@@ -1,6 +1,6 @@
 package service
 
-import "github.com/hack-btg/backend/internal/domains/models"
+import "github.com/hack-btg/backend/banking-service/internal/domains/models"
 
 type CaixinhaRepository interface {
 	Create(cx models.Caixinha) (models.Caixinha, error)

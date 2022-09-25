@@ -1,6 +1,6 @@
 package storage
 
-import "github.com/hack-btg/backend/internal/domains/models"
+import "github.com/hack-btg/backend/banking-service/internal/domains/models"
 
 type BankStorage struct {
 	store models.Banks

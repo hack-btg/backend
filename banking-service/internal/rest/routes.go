@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/hack-btg/backend/internal/jwt"
-	"github.com/hack-btg/backend/internal/rest/handlers"
+	"github.com/hack-btg/backend/banking-service/internal/jwt"
+	"github.com/hack-btg/backend/banking-service/internal/rest/handlers"
 	"github.com/labstack/echo/v4"
 )
 

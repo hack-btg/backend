@@ -4,9 +4,9 @@ import (
 	"fmt"
 
 	"github.com/go-playground/validator/v10"
-	"github.com/hack-btg/backend/internal/jwt"
-	"github.com/hack-btg/backend/internal/logger"
-	"github.com/hack-btg/backend/internal/rest"
+	"github.com/hack-btg/backend/banking-service/internal/jwt"
+	"github.com/hack-btg/backend/banking-service/internal/logger"
+	"github.com/hack-btg/backend/banking-service/internal/rest"
 	"github.com/kelseyhightower/envconfig"
 )
 

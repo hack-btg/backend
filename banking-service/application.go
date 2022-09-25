@@ -7,10 +7,10 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/hack-btg/backend/internal/jwt"
-	"github.com/hack-btg/backend/internal/logger"
-	"github.com/hack-btg/backend/internal/option"
-	"github.com/hack-btg/backend/internal/rest"
+	"github.com/hack-btg/backend/banking-service/internal/jwt"
+	"github.com/hack-btg/backend/banking-service/internal/logger"
+	"github.com/hack-btg/backend/banking-service/internal/option"
+	"github.com/hack-btg/backend/banking-service/internal/rest"
 	"golang.org/x/sync/errgroup"
 
 	log "github.com/sirupsen/logrus"
