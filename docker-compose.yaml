@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  banking-service:
+    image: banking-service:latest
+    environment:
+      - MAX_GOROUTINES=20
+    ports:
+      - "5001:5001"
+  credit-search:
+    image: credit-search:latest
+    depends_on:
+        - banking-service
+    environment:
+        - BANKING_URI=http://banking-service:5001/banks/
+    ports:
+        - "5002:5002"
