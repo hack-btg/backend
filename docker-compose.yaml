@@ -15,3 +15,7 @@ services:
         - BANKING_URI=http://banking-service:5001/banks/
     ports:
         - "5002:5002"
+  community-service:
+    image: community-service:latest
+    ports:
+        - "5003:5003"
