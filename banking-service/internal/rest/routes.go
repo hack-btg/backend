@@ -17,6 +17,7 @@ func RouterRegister(e *echo.Echo, tp jwt.TokenProvider) {
 	e.POST("/login", adapter.UserLogin)
 	// todo
 	users := e.Group("/users", JWT())
+	users.GET("/info", adapter.UserInfo)             //get User info
 	users.POST("/caixinha", adapter.CreateCX)        //create
 	users.GET("/caixinhas", adapter.ListCX)          //list
 	users.PUT("/caixinhas/", adapter.UpdateCX)       //update

@@ -15,3 +15,7 @@ type BankRepository interface {
 	IsEmpty() bool
 	Load(models.Banks)
 }
+
+type UserRepository interface {
+	Info() models.UserInfo
+}
