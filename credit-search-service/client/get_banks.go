@@ -5,11 +5,12 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 	"time"
 )
 
 func GetBanks() (Banks, error) {
-	resp, err := http.Get("backend:5001/banks/")
+	resp, err := http.Get(os.Getenv("BANKING_URI"))
 	if err != nil {
 		log.Println("[getBanks] err ", err.Error())
 		return nil, err
